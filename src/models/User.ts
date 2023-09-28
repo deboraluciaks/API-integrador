@@ -3,16 +3,10 @@ export enum USER_ROLES {
     ADMIN = "ADMIN"
 }
 
-export interface TokenPayload {
-    id: string,
-    name: string,
-    role: USER_ROLES
-}
-
 export interface UserDB {
     id: string,
     name: string,
-    email: string ,
+    email: string,
     password: string,
     role: USER_ROLES,
     created_at: string
@@ -21,25 +15,35 @@ export interface UserDB {
 export interface UserModel {
     id: string,
     name: string,
-    email: string ,
+    email: string,
     role: USER_ROLES,
     createdAt: string
 }
 
+export interface TokenPayload {
+    id: string,
+    name: string,
+    role: USER_ROLES
+}
+
 export class User {
-    constructor (
-        private id: string,
+    constructor(private id: string,
         private name: string,
-        private email: string ,
+        private email: string,
         private password: string,
         private role: USER_ROLES,
-        private createdAt: string
-    ){}
+        private createdAt: string) {
+        this.id = id,
+            this.name = name,
+            this.email = email,
+            this.password = password,
+            this.role = role,
+            this.createdAt = createdAt
+    }
 
     public getId(): string {
         return this.id
     }
-
     public setId(value: string): void {
         this.id = value
     }
@@ -47,7 +51,6 @@ export class User {
     public getName(): string {
         return this.name
     }
-
     public setName(value: string): void {
         this.name = value
     }
@@ -55,7 +58,6 @@ export class User {
     public getEmail(): string {
         return this.email
     }
-
     public setEmail(value: string): void {
         this.email = value
     }
@@ -63,7 +65,6 @@ export class User {
     public getPassword(): string {
         return this.password
     }
-
     public setPassword(value: string): void {
         this.password = value
     }
@@ -71,7 +72,6 @@ export class User {
     public getRole(): USER_ROLES {
         return this.role
     }
-
     public setRole(value: USER_ROLES): void {
         this.role = value
     }
@@ -79,12 +79,11 @@ export class User {
     public getCreatedAt(): string {
         return this.createdAt
     }
-
-    public setcreatedAt(value: string): void {
+    public setCreatedAt(value: string): void {
         this.createdAt = value
     }
 
-    public toDBModel (): UserDB {
+    public toDBModel(): UserDB {
         return {
             id: this.id,
             name: this.name,
@@ -95,7 +94,7 @@ export class User {
         }
     }
 
-    public toModel(): UserModel {
+    public toBusinessModel(): UserModel {
         return {
             id: this.id,
             name: this.name,
